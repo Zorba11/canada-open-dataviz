@@ -24,19 +24,25 @@ import javax.sql.DataSource;
 @EnableBatchProcessing
 public class BatchConfig {
 
+    private final String[] FIELD_NAMES = new String[] {
+            "id", "address", "area_name", "price", "lat", "lng"
+    };
+
     @Autowired
     public JobBuilderFactory jobBuilderFactory;
 
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
 
+
+
     @Bean
     public FlatFileItemReader<SoldHouseInput> reader() {
         return new FlatFileItemReaderBuilder<SoldHouseInput>()
                 .name("HouseSaleDataReader")
-                .resource(new ClassPathResource("ont-house-sales.csv"))
+                .resource(new ClassPathResource("ont-house-sales-1.csv"))
                 .delimited()
-                .names(new String[]{"firstName", "lastName"})
+                .names(FIELD_NAMES)
                 .fieldSetMapper(new BeanWrapperFieldSetMapper<SoldHouseInput>() {{
                     setTargetType(SoldHouseInput.class);
                 }})

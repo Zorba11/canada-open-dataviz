@@ -2,8 +2,10 @@ package com.zorba11.canadaopendataviz.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="houses")
 public class SoldHouse {
 
     @Id
@@ -17,6 +19,20 @@ public class SoldHouse {
     private long price;
     private double lat;
     private double lng;
+
+    public SoldHouse() {
+    }
+
+    public SoldHouse(long id, String address, String areaName, long price, double lat, double lng) {
+        this.id = id;
+        this.address = address;
+        this.areaName = areaName;
+        this.price = price;
+        this.lat = lat;
+        this.lng = lng;
+    }
+
+
 
     public long getId() {
         return id;
